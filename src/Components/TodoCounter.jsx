@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import './styles/TodoCounter.css'
 
-export default function TodoCounter() {
+export default function TodoCounter({ total, completed }) {
     return (
-        <Fragment>
-            <h2 className="TodoCounter" >Has completado 2 de 3 ToDos</h2>
-        </Fragment>
+        <h2 className="TodoCounter" >Has completado { completed } de { total } ToDos</h2>
     )
 }
