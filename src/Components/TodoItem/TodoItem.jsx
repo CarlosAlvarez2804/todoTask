@@ -1,21 +1,13 @@
 import React, { Fragment } from 'react'
-import './styles/TodoItem.css'
+import './TodoItem.css'
 
 export default function TodoItem(props) {
-
-    const handleCompleted = () => {
-        alert('Ya se completo el todo ' + props.text)
-    }
-
-    const handleDelete = () => {
-        alert('Ya se elimino el todo ' + props.text)
-    }
-
+    const { onComplete, onDelete } = props
     return (
         <Fragment>
             <li className="TodoItem">
                 <span 
-                    onClick={ handleCompleted } 
+                    onClick={ onComplete } 
                     className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`} 
                 >
                     C
@@ -24,7 +16,7 @@ export default function TodoItem(props) {
                     { props.text }
                 </p>
                 <span 
-                    onClick={ handleDelete } 
+                    onClick={ onDelete } 
                     className="Icon Icon-delete" 
                 >
                     X

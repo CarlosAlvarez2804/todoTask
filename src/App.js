@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react'
-import CreateTodoButton from './Components/CreateTodoButton';
-import TodoCounter from './Components/TodoCounter';
-import TodoItem from './Components/TodoItem';
-import TodoList from './Components/TodoList';
-import TodoSearch from './Components/TodoSearch';
+import CreateTodoButton from './Components/CreateTodoButton/CreateTodoButton';
+import TodoCounter from './Components/TodoCounter/TodoCounter';
+import TodoItem from './Components/TodoItem/TodoItem';
+import TodoList from './Components/TodoList/TodoList';
+import TodoSearch from './Components/TodoSearch/TodoSearch';
 
 
 const defaultTodos = [
@@ -37,6 +37,21 @@ function App() {
     })
   }
 
+  const completeTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text)
+    const newTodos = [...todos]
+    newTodos[todoIndex].completed = true
+    setTodos(newTodos)
+  }
+
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text)
+    const newTodos = [...todos]
+    newTodos.splice(todoIndex, 1)
+    setTodos(newTodos)
+  }
+
+
   return (
     <Fragment>
         <TodoCounter 
@@ -50,7 +65,13 @@ function App() {
         <CreateTodoButton text="+" />
         <TodoList> 
             {serchedTodos.map(todo => (
-                <TodoItem key={todo.text} text={todo.text} completed={todo.completed} />
+                <TodoItem 
+                  key={todo.text} 
+                  text={todo.text} 
+                  completed={todo.completed}
+                  onComplete={() => completeTodo(todo.text)}
+                  onDelete={() => deleteTodo(todo.text)}
+                />
             ))}
           </TodoList>
 
